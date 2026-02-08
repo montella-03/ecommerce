@@ -1,12 +1,12 @@
 package handlers
 
 import (
+	"ecommerce/internal/database"
+	"ecommerce/internal/models"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/montella-03/ecommerce/internal/database"
-	"github.com/montella-03/ecommerce/internal/models"
 )
 
 // GetProducts - List all products (public)

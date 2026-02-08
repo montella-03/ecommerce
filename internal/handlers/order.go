@@ -1,13 +1,12 @@
 package handlers
 
 import (
+	"ecommerce/internal/database"
+	"ecommerce/internal/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-
-	"github.com/montella-03/ecommerce/internal/database"
-	"github.com/montella-03/ecommerce/internal/models"
 )
 
 // CreateOrder - Checkout current cart

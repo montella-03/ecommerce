@@ -1,11 +1,11 @@
 package handlers
 
 import (
+	"ecommerce/internal/database"
+	"ecommerce/internal/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/montella-03/ecommerce/internal/database"
-	"github.com/montella-03/ecommerce/internal/models"
 )
 
 // getOrCreateCart - helper (not exported)

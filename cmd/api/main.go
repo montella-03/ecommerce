@@ -1,15 +1,14 @@
 package main
 
 import (
+	"ecommerce/internal/database"
+	"ecommerce/internal/handlers"
+	"ecommerce/internal/middleware"
 	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-
-	"github.com/montella-03/ecommerce/internal/database"
-	"github.com/montella-03/ecommerce/internal/handlers"
-	"github.com/montella-03/ecommerce/internal/middleware"
 )
 
 func main() {

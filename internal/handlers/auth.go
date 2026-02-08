@@ -2,6 +2,8 @@
 package handlers
 
 import (
+	"ecommerce/internal/database"
+	"ecommerce/internal/models"
 	"net/http"
 	"os"
 	"time"
@@ -9,9 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
-
-	"github.com/montella-03/ecommerce/internal/database"
-	"github.com/montella-03/ecommerce/internal/models"
 )
 
 type RegisterInput struct {
