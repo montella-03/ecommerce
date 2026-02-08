@@ -27,7 +27,6 @@ func getOrCreateCart(userID uint) (*models.Cart, error) {
 	return &cart, nil
 }
 
-// GetCart
 func GetCart(c *gin.Context) {
 	userID := c.GetUint("user_id")
 
@@ -40,7 +39,6 @@ func GetCart(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"cart": cart})
 }
 
-// AddToCart
 func AddToCart(c *gin.Context) {
 	userID := c.GetUint("user_id")
 
