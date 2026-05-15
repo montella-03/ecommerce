@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Manager</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">Inventory workspace</p>
+          <h1>Product Manager</h1>
+        </div>
+        <div class="session-actions">
+          <span id="sessionState" class="session-state">Signed out</span>
+          <button id="logoutButton" class="ghost hidden" type="button">Sign out</button>
+        </div>
+      </section>
+
+      <section id="authPanel" class="auth-layout">
+        <div class="auth-copy">
+          <h2>Run your catalog from one clean screen.</h2>
+          <p>Create an account or sign in, then add products, update pricing and stock, and keep the storefront data tidy.</p>
+        </div>
+
+        <form id="authForm" class="panel auth-form">
+          <div class="tabs" role="tablist" aria-label="Authentication mode">
+            <button id="loginTab" class="tab active" type="button">Sign in</button>
+            <button id="registerTab" class="tab" type="button">Register</button>
+          </div>
+          <label>
+            Email
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            Password
+            <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required>
+          </label>
+          <button id="authSubmit" class="primary" type="submit">Sign in</button>
+          <p id="authMessage" class="message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="dashboard" class="admin-shell hidden">
+        <aside class="sidebar" aria-label="Admin navigation">
+          <div class="brand-block">
+            <span class="brand-mark">PM</span>
+            <div>
+              <strong>Product Manager</strong>
+              <span>Admin console</span>
+            </div>
+          </div>
+
+          <nav class="side-nav">
+            <button id="productsViewTab" class="side-link active" type="button">
+              <span>Products</span>
+              <strong id="navProductCount">0</strong>
+            </button>
+            <button id="usersViewTab" class="side-link" type="button">
+              <span>Users</span>
+              <strong id="navUserCount">0</strong>
+            </button>
+          </nav>
+        </aside>
+
+        <div class="admin-main">
+          <div class="admin-header">
+            <div>
+              <p class="eyebrow">Operations</p>
+              <h2 id="viewTitle">Products</h2>
+            </div>
+            <div class="header-actions">
+              <button id="addExamples" class="ghost" type="button">Add examples</button>
+              <button id="openProductDrawer" class="primary" type="button">Add product</button>
+            </div>
+          </div>
+
+          <div class="stats-grid" aria-label="Product statistics">
+            <article class="stat">
+              <span>Total products</span>
+              <strong id="totalProducts">0</strong>
+            </article>
+            <article class="stat">
+              <span>Inventory value</span>
+              <strong id="inventoryValue">$0.00</strong>
+            </article>
+            <article class="stat">
+              <span>Low stock</span>
+              <strong id="lowStock">0</strong>
+            </article>
+            <article class="stat">
+              <span>Registered users</span>
+              <strong id="totalUsers">0</strong>
+            </article>
+          </div>
+
+          <section id="productsView" class="catalog">
+            <div class="catalog-toolbar">
+              <div>
+                <p class="eyebrow">Catalog</p>
+                <h2>Products</h2>
+              </div>
+              <div class="tools">
+                <input id="searchProducts" type="search" placeholder="Search products">
+                <select id="stockFilter" aria-label="Stock filter">
+                  <option value="all">All stock</option>
+                  <option value="available">Available</option>
+                  <option value="low">Low stock</option>
+                  <option value="out">Out of stock</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th class="actions-col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="productRows"></tbody>
+              </table>
+              <div id="emptyState" class="empty-state hidden">
+                <h3>No products found</h3>
+                <p>Add a new product or adjust your filters.</p>
+              </div>
+            </div>
+            <div class="pagination-bar">
+              <span id="productPageInfo">Page 1 of 1</span>
+              <div class="pagination-actions">
+                <button id="prevProductsPage" class="ghost" type="button">Previous</button>
+                <button id="nextProductsPage" class="ghost" type="button">Next</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="usersView" class="catalog hidden">
+            <div class="catalog-toolbar">
+              <div>
+                <p class="eyebrow">Accounts</p>
+                <h2>Users</h2>
+              </div>
+              <div class="tools compact-tools">
+                <input id="searchUsers" type="search" placeholder="Search users">
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Joined</th>
+                  </tr>
+                </thead>
+                <tbody id="userRows"></tbody>
+              </table>
+              <div id="emptyUsersState" class="empty-state hidden">
+                <h3>No users found</h3>
+                <p>Register an account or adjust your search.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div id="drawerBackdrop" class="drawer-backdrop hidden"></div>
+        <aside id="productDrawer" class="product-drawer hidden" aria-label="Product details">
+          <form id="productForm" class="product-form">
+            <div class="drawer-heading">
+              <div>
+                <p class="eyebrow">Product details</p>
+                <h2 id="formTitle">Add product</h2>
+              </div>
+              <button id="closeProductDrawer" class="icon-button" type="button" aria-label="Close product drawer">x</button>
+            </div>
+
+            <label>
+              Name
+              <input id="productName" name="name" type="text" required maxlength="120">
+            </label>
+            <label>
+              Description
+              <textarea id="productDescription" name="description" rows="5" maxlength="500"></textarea>
+            </label>
+            <div class="field-row">
+              <label>
+                Price
+                <input id="productPrice" name="price" type="number" min="0.01" step="0.01" required>
+              </label>
+              <label>
+                Stock
+                <input id="productStock" name="stock" type="number" min="0" step="1" required>
+              </label>
+            </div>
+            <div class="drawer-actions">
+              <button id="saveProduct" class="primary" type="submit">Create product</button>
+              <button id="cancelEdit" class="ghost" type="button">Cancel</button>
+            </div>
+            <p id="productMessage" class="message" aria-live="polite"></p>
+          </form>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
